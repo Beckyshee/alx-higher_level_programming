@@ -1,1 +1,1 @@
-JavaScript objects, classes, methode methods, scopes & closure...modernJs
+Objects, Scopes and Closures In JavaScript
