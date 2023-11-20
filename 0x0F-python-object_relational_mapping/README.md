@@ -11,3 +11,4 @@ Python SQLAlchemy Cheatsheet
 SQLAlchemy ORM Tutorial for Python Developers (Warning: This tutorial is with PostgreSQL, but the concept of SQLAlchemy is the same with MySQL)
 SQLAlchemy Tutorial
 Python Virtual Environments: A primer
+~                                         
