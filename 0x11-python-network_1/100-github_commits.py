@@ -1,21 +1,14 @@
 #!/usr/bin/python3
-"""Retrieves the last 10 commits of a repository"""
-import requests
-import sys
-
-if __name__ == "__main__":
-    repo_name = sys.argv[1]
-    username = sys.argv[2]
-    url = 'https://api.github.com'
-    req_url = '{}/repos/{}/{}/commits?{}'.format(
-            url, username, repo_name, 'per_page=10')
-    r = requests.get(
-            req_url,
-            headers={'Accept': 'application/vnd.github.v3+json'})
-    if r.ok:
-        [
-                print('{}: {}'.format(
-                    commit['sha'],
-                    commit['commit']['author']['name']))
-                for commit in r.json()
-        ]
+"""
+list 10 commits (from the most recent to oldest) of the repository and user
+sent in as arguments
+"""
+if __name__ == '__main__':
+    import requests
+    from sys import argv
+    r = requests.get('https://api.github.com/repos/{}/{}/commits'
+                     .format(argv[2], argv[1]))
+    commits = r.json()
+    for commit in commits[:10]:
+        print(commit.get('sha'), end=': ')
+        print(commit.get('commit').get('author').get('name'))

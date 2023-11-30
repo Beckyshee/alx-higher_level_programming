@@ -1,18 +1,18 @@
 #!/usr/bin/python3
-"""Sends a search parameter to a URL."""
-import requests
-import sys
+"""Script that sends a POST request with data in the variable q"""
 
-if __name__ == "__main__":
+import requests
+from sys import argv
+
+if __name__ == '__main__':
     url = "http://0.0.0.0:5000/search_user"
-    search_query = sys.argv[1] if len(sys.argv) > 1 else ""
-    data = {'q': search_query}
-    r = requests.post(url, data=data)
+    data = {"q": argv[1][0] if len(argv) > 1 else ""}
+    response = requests.post(url, data=data)
     try:
-        content = r.json()
-        if content:
-            print("[{}] {}".format(content['id'], content['name']))
-        else:
+        d = response.json()
+        if not d:
             print("No result")
-    except Exception:
+        else:
+            print("[{}] {}".format(d.get("id"), d.get("name")))
+    except ValueError:
         print("Not a valid JSON")
